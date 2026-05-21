@@ -1,0 +1,2670 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Tamu SPMB - SMA Negeri 1 Kaliwungu</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a5276;
+            --primary-dark: #154360;
+            --secondary: #f39c12;
+            --secondary-light: #f8c471;
+            --success: #27ae60;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --info: #3498db;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --white: #ffffff;
+            --gray: #95a5a6;
+            --light-gray: #bdc3c7;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: var(--dark);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--primary);
+        }
+
+        .school-info h1 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .school-info p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .live-clock {
+            background: rgba(255,255,255,0.15);
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .btn-admin {
+            background: var(--secondary);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .btn-admin:hover {
+            background: var(--secondary-light);
+            transform: translateY(-2px);
+        }
+
+        .nav-bar {
+            background: rgba(0,0,0,0.1);
+            padding: 0 20px;
+        }
+
+        .nav-menu {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            list-style: none;
+            gap: 0;
+        }
+
+        .nav-item { position: relative; }
+
+        .nav-link {
+            display: block;
+            padding: 14px 20px;
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255,255,255,0.1);
+            border-bottom-color: var(--secondary);
+        }
+
+        .nav-link i { margin-right: 8px; }
+
+        .main-content {
+            margin-top: 120px;
+            padding: 20px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+        }
+
+        .card-header {
+            padding: 20px 25px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-header h2 {
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-header h2 i { font-size: 1.3rem; }
+
+        .card-body { padding: 25px; }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--info) 100%);
+            color: var(--white);
+            padding: 40px;
+            border-radius: var(--radius);
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--white);
+        }
+
+        .stat-icon.blue { background: linear-gradient(135deg, #3498db, #2980b9); }
+        .stat-icon.green { background: linear-gradient(135deg, #27ae60, #229954); }
+        .stat-icon.orange { background: linear-gradient(135deg, #f39c12, #e67e22); }
+        .stat-icon.red { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .stat-icon.purple { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+
+        .stat-info h3 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .stat-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary), var(--info));
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-left: 25px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 4px solid var(--primary);
+            box-shadow: 0 0 0 4px rgba(26, 82, 118, 0.2);
+        }
+
+        .timeline-item.active::before {
+            background: var(--secondary);
+            border-color: var(--secondary);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 4px rgba(243, 156, 18, 0.2); }
+            50% { box-shadow: 0 0 0 8px rgba(243, 156, 18, 0.1); }
+        }
+
+        .timeline-date {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .timeline-item.active .timeline-date { background: var(--secondary); }
+
+        .timeline-content {
+            background: var(--light);
+            padding: 15px 20px;
+            border-radius: var(--radius-sm);
+            border-left: 4px solid var(--primary);
+        }
+
+        .timeline-item.active .timeline-content {
+            border-left-color: var(--secondary);
+            background: #fff8e1;
+        }
+
+        .timeline-content h4 {
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        .timeline-item.active .timeline-content h4 { color: var(--secondary-dark); }
+
+        .timeline-content p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .timeline-status {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .status-upcoming { background: #d4edda; color: #155724; }
+        .status-active { background: #fff3cd; color: #856404; }
+        .status-completed { background: #d1ecf1; color: #0c5460; }
+
+        .jalur-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .jalur-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            border-top: 5px solid;
+        }
+
+        .jalur-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .jalur-card.domisili { border-top-color: #3498db; }
+        .jalur-card.afirmasi { border-top-color: #27ae60; }
+        .jalur-card.prestasi { border-top-color: #f39c12; }
+        .jalur-card.mutasi { border-top-color: #e74c3c; }
+
+        .jalur-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .jalur-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--white);
+        }
+
+        .jalur-card.domisili .jalur-icon { background: #3498db; }
+        .jalur-card.afirmasi .jalur-icon { background: #27ae60; }
+        .jalur-card.prestasi .jalur-icon { background: #f39c12; }
+        .jalur-card.mutasi .jalur-icon { background: #e74c3c; }
+
+        .jalur-title h3 {
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+
+        .jalur-title .kuota {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-top: 3px;
+        }
+
+        .jalur-body { padding: 0 20px 20px; }
+
+        .jalur-body ul { list-style: none; }
+
+        .jalur-body li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .jalur-body li:last-child { border-bottom: none; }
+
+        .jalur-body li i {
+            color: var(--success);
+            margin-top: 3px;
+        }
+
+        .sub-jalur {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: var(--radius-sm);
+            margin-top: 10px;
+        }
+
+        .sub-jalur h4 {
+            font-size: 0.9rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sub-jalur-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 0.85rem;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .sub-jalur-item:last-child { border-bottom: none; }
+
+        .sub-jalur-item .label { color: var(--dark); }
+        .sub-jalur-item .value {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .syarat-category { margin-bottom: 25px; }
+
+        .syarat-category h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .syarat-list { display: grid; gap: 12px; }
+
+        .syarat-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+
+        .syarat-item:hover {
+            background: #e8f4f8;
+            transform: translateX(5px);
+        }
+
+        .syarat-number {
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .syarat-content h4 {
+            font-size: 0.95rem;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .syarat-content p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        .syarat-tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .tag-wajib { background: #ffebee; color: #c62828; }
+        .tag-penting { background: #fff3e0; color: #ef6c00; }
+        .tag-info { background: #e3f2fd; color: #1565c0; }
+
+        .tata-cara-step {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .tata-cara-step:hover { box-shadow: var(--shadow-lg); }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            min-width: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--info));
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .step-content { flex: 1; }
+
+        .step-content h3 {
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .step-content p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .step-note {
+            background: #fff8e1;
+            padding: 10px 15px;
+            border-radius: var(--radius-sm);
+            border-left: 4px solid var(--secondary);
+            font-size: 0.85rem;
+            color: #856404;
+        }
+
+        .step-note i {
+            margin-right: 8px;
+            color: var(--secondary);
+        }
+
+        .qr-section {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: var(--radius);
+            margin-top: 20px;
+        }
+
+        .qr-placeholder {
+            width: 200px;
+            height: 200px;
+            background: var(--white);
+            margin: 0 auto 20px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            border: 2px dashed var(--light-gray);
+        }
+
+        .qr-placeholder i {
+            font-size: 4rem;
+            color: var(--light-gray);
+        }
+
+        .qr-section h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .qr-section p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 30px 20px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer h3 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .footer p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--secondary);
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal {
+            background: var(--white);
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            box-shadow: var(--shadow-lg);
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--light-gray);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 3000;
+            overflow-y: auto;
+        }
+
+        .admin-panel.active { display: block; }
+
+        .admin-container {
+            background: #f5f6fa;
+            min-height: 100vh;
+        }
+
+        .admin-header {
+            background: var(--dark);
+            color: var(--white);
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .admin-header h2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+        }
+
+        .btn-logout {
+            background: var(--danger);
+            color: var(--white);
+            border: none;
+            padding: 8px 20px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .admin-body {
+            padding: 25px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .admin-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .admin-nav-btn {
+            padding: 10px 20px;
+            background: var(--white);
+            border: 2px solid var(--light-gray);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--dark);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .admin-nav-btn:hover, .admin-nav-btn.active {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .admin-section {
+            display: none;
+            background: var(--white);
+            padding: 25px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .admin-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .admin-section h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .admin-form {
+            display: grid;
+            gap: 15px;
+        }
+
+        .admin-form .form-group { margin-bottom: 0; }
+
+        .admin-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--light-gray);
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            min-height: 100px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .admin-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn-save {
+            background: var(--success);
+            color: var(--white);
+            border: none;
+            padding: 12px 30px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .btn-save:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .data-table th, .data-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--light);
+        }
+
+        .data-table th {
+            background: var(--primary);
+            color: var(--white);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .data-table tr:hover { background: #f8f9fa; }
+
+        .btn-edit, .btn-delete {
+            padding: 6px 12px;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-right: 5px;
+            transition: var(--transition);
+        }
+
+        .btn-edit {
+            background: var(--info);
+            color: var(--white);
+        }
+
+        .btn-delete {
+            background: var(--danger);
+            color: var(--white);
+        }
+
+        .btn-edit:hover, .btn-delete:hover {
+            opacity: 0.8;
+            transform: scale(1.05);
+        }
+
+        .btn-add {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .btn-add:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert.active { display: flex; }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .notif-badge {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--white);
+            padding: 20px 25px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            display: none;
+            align-items: center;
+            gap: 15px;
+            z-index: 4000;
+            animation: slideIn 0.3s ease;
+            max-width: 400px;
+        }
+
+        .notif-badge.active { display: flex; }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .notif-badge.success { border-left: 4px solid var(--success); }
+        .notif-badge.error { border-left: 4px solid var(--danger); }
+
+        .notif-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .notif-badge.success .notif-icon {
+            background: #d4edda;
+            color: var(--success);
+        }
+
+        .notif-badge.error .notif-icon {
+            background: #f8d7da;
+            color: var(--danger);
+        }
+
+        .notif-content h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .notif-content p {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-left: 5px solid var(--info);
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .info-box i {
+            font-size: 1.5rem;
+            color: var(--info);
+        }
+
+        .info-box-content h4 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .info-box-content p {
+            font-size: 0.9rem;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-left: 5px solid var(--warning);
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .warning-box i {
+            font-size: 1.5rem;
+            color: var(--warning);
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-left: 5px solid var(--success);
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .success-box i {
+            font-size: 1.5rem;
+            color: var(--success);
+        }
+
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            .nav-menu {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            .main-content { margin-top: 160px; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .jalur-grid { grid-template-columns: 1fr; }
+            .tata-cara-step {
+                flex-direction: column;
+                text-align: center;
+            }
+            .step-number { margin: 0 auto; }
+        }
+
+        @media print {
+            .header, .footer, .btn-admin, .nav-bar { display: none !important; }
+            .main-content { margin-top: 20px; }
+            .section {
+                display: block !important;
+                page-break-after: always;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <!-- Notification Badge -->
+    <div class="notif-badge" id="notifBadge">
+        <div class="notif-icon"><i class="fas fa-check"></i></div>
+        <div class="notif-content">
+            <h4>Berhasil!</h4>
+            <p>Data berhasil disimpan.</p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="logo-section">
+                <div class="logo-icon"><i class="fas fa-school"></i></div>
+                <div class="school-info">
+                    <h1>SMA Negeri 1 Kaliwungu</h1>
+                    <p>Sistem Penerimaan Murid Baru (SPMB) T.A. 2026/2027</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="live-clock" id="liveClock">--:--:--</div>
+                <button class="btn-admin" onclick="openAdminLogin()">
+                    <i class="fas fa-lock"></i> Admin
+                </button>
+            </div>
+        </div>
+        <nav class="nav-bar">
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link active" onclick="showSection('beranda')" data-section="beranda">
+                        <i class="fas fa-home"></i> Beranda
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="showSection('jadwal')" data-section="jadwal">
+                        <i class="fas fa-calendar-alt"></i> Jadwal
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="showSection('jalur')" data-section="jalur">
+                        <i class="fas fa-road"></i> Jalur
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="showSection('persyaratan')" data-section="persyaratan">
+                        <i class="fas fa-file-alt"></i> Persyaratan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="showSection('tatacara')" data-section="tatacara">
+                        <i class="fas fa-list-ol"></i> Tata Cara
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="showSection('kontak')" data-section="kontak">
+                        <i class="fas fa-phone"></i> Kontak
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Beranda Section -->
+        <section id="beranda" class="section active">
+            <div class="hero">
+                <h2><i class="fas fa-graduation-cap"></i> Selamat Datang di E-Tamu SPMB</h2>
+                <p>SMA Negeri 1 Kaliwungu - Tahun Ajaran 2026/2027</p>
+                <div class="hero-badge">
+                    <i class="fas fa-shield-alt"></i> NO TITIP - NO JASTIP
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue"><i class="fas fa-users"></i></div>
+                    <div class="stat-info">
+                        <h3 id="statDayatampung">396</h3>
+                        <p>Daya Tampung</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green"><i class="fas fa-route"></i></div>
+                    <div class="stat-info">
+                        <h3>11</h3>
+                        <p>Rombel-Kelas</p>
+                    </div>
+                </div>
+		<div class="stat-card">
+                    <div class="stat-icon green"><i class="fas fa-route"></i></div>
+                    <div class="stat-info">
+                        <h3>4</h3>
+                        <p>Jalur Pendaftaran</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange"><i class="fas fa-calendar-check"></i></div>
+                    <div class="stat-info">
+                        <h3 id="statJadwal">12</h3>
+                        <p>Tahapan Kegiatan</p>
+                    </div>
+                </div>
+		<div class="stat-card">
+                    <div class="stat-icon purple"><i class="fas fa-award"></i></div>
+                    <div class="stat-info">
+                        <h3 id="statDomisili">33%</h3>
+                        <p>Kuota Domisili</p>
+                    </div>
+                </div>
+		<div class="stat-card">
+                    <div class="stat-icon purple"><i class="fas fa-award"></i></div>
+                    <div class="stat-info">
+                        <h3 id="statPrestasi">30%</h3>
+                        <p>Kuota Prestasi</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple"><i class="fas fa-award"></i></div>
+                    <div class="stat-info">
+                        <h3 id="statAfirmasi">32%</h3>
+                        <p>Kuota Afirmasi</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon red"><i class="fas fa-hand-holding-heart"></i></div>
+                    <div class="stat-info">
+                        <h3 id="statMutasi">5%</h3>
+                        <p>Kuota Mutasi</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-bullhorn"></i> Pengumuman Terbaru</h2>
+                </div>
+                <div class="card-body" id="pengumumanList">
+                    <div class="info-box">
+                        <i class="fas fa-info-circle"></i>
+                        <div class="info-box-content">
+                            <h4>Pendaftaran SPMB 2026/2027</h4>
+                            <p>Pendaftaran SPMB SMA Negeri 1 Kaliwungu akan dibuka pada tanggal <strong>03 - 12 Juni 2026</strong>. Calon murid baru dapat mengajukan akun SMPB secara daring melalui website resmi.</p>
+                        </div>
+                    </div>
+                    <div class="warning-box">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div class="info-box-content">
+                            <h4>Perubahan Sumber Data Kemiskinan</h4>
+                            <p>Mulai SPMB 2026/2027, sumber data kemiskinan berubah dari DTKS menjadi <strong>DTSEN (Data Tunggal Sosial dan Ekonomi Nasional)</strong>. Pastikan data keluarga Anda terdaftar dalam DTSEN.</p>
+                        </div>
+                    </div>
+                    <div class="success-box">
+                        <i class="fas fa-check-circle"></i>
+                        <div class="info-box-content">
+                            <h4>Prestasi Terbaik Nasional</h4>
+                            <p>Provinsi Jawa Tengah meraih predikat <strong>Terbaik Nasional</strong> dalam penyelenggaraan SPMB SMAN & SMKN T.A. 2025/2026. Mari kita pertahankan bersama!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="qr-section">
+                <div class="qr-placeholder" id="qrPlaceholder">
+                    <!-- Memanggil API QR Code dinamis eksternal menggunakan alamat spmb.jatengprov.go.id -->
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://spmb.jatengprov.go.id" alt="QR Code SPMB Jateng">
+                </div>
+                <h3>Scan QR Code untuk Informasi Lengkap</h3>
+                <p>Akses panduan SPMB lengkap melalui scan QR code di atas atau kunjungi website resmi spmb.jatengprov.go.id</p>
+            </div>
+        </section>
+
+
+        <!-- Jadwal Section -->
+        <section id="jadwal" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-calendar-alt"></i> Jadwal Pelaksanaan SPMB T.A. 2026/2027</h2>
+                </div>
+                <div class="card-body">
+                    <div class="timeline" id="jadwalTimeline">
+                        <div class="timeline-item">
+                            <span class="timeline-date">15 Mei 2026</span>
+                            <div class="timeline-content">
+                                <h4>Pengumuman SPMB 2026</h4>
+                                <p>Pengumuman SPMB di website, media sosial, dan papan pengumuman sekolah</p>
+                                <span class="timeline-status status-upcoming">Akan Datang</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-date">03 - 12 Juni 2026</span>
+                            <div class="timeline-content">
+                                <h4>Pengajuan Akun</h4>
+                                <p>CMB mengajukan akun SMPB secara daring. Khusus tanggal 12 Juni 2026 DITUTUP pukul 15:30 WIB</p>
+                                <span class="timeline-status status-upcoming">Akan Datang</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-date">04 - 13 Juni 2026</span>
+                            <div class="timeline-content">
+                                <h4>Verifikasi Dokumen dan Aktivasi Akun</h4>
+                                <p>Setelah pengajuan akun, CMB melakukan verifikasi dokumen/berkas secara luring di Sekolah. Khusus tanggal 13 Juni 2026 DITUTUP pukul 17:00 WIB</p>
+                                <span class="timeline-status status-upcoming">Akan Datang</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-date">15 - 18 Juni 2026</span>
+                            <div class="timeline-content">
+                                <h4>Pendaftaran dan Pemilihan Sekolah</h4>
+                                <p>Dilakukan CMB secara online. Khusus tanggal 18 Juni 2026 DITUTUP pukul 17:00 WIB</p>
+                                <span class="timeline-status status-upcoming">Akan Datang</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-date">19 - 20 Juni 2026</span>
+                            <div class="timeline-content">
+                                <h4>Evaluasi dan Masa Tenang</h4>
+                                <p>Panitia melakukan evaluasi proses/tahapan pelaksanaan SPMB untuk memitigasi potensi kerawanan</p>
+                                <span class="timeline-status status-upcoming">Akan Datang</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-date">21 Juni 2026</span>
+                            <div class="timeline-content">
+                                <h4>Pengumuman Hasil Seleksi (Utama)</h4>
+                                <p>Pengumuman hasil di website, medsos, papan pengumuman sekolah. Paling lambat pukul 23:55 WIB di situs ppdb.jatengprov.go.id</p>
+                                <span class="timeline-status status-upcoming">Akan Datang</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-date">22 - 25 Juni 2026</span>
+                            <div class="timeline-content">
+                                <h4>Daftar Ulang (Utama)</h4>
+                                <p>CMB yang dinyatakan lolos seleksi melakukan daftar ulang secara luring di sekolah tempat CMB dinyatakan lolos seleksi. Jam 08:00 - 15:30 WIB</p>
+                                <span class="timeline-status status-upcoming">Akan Datang</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-date">26 Juni 2026</span>
+                            <div class="timeline-content">
+                                <h4>Pengumuman Daftar Peserta Cadangan</h4>
+                                <p>Berdasarkan data CMB yang dinyatakan lolos seleksi namun tidak melakukan daftar ulang, maka kekosongan tersebut akan diumumkan sebagai daya tampung cadangan</p>
+                                <span class="timeline-status status-upcoming">Akan Datang</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-date">29 - 30 Juni 2026</span>
+                            <div class="timeline-content">
+                                <h4>Daftar Ulang (Cadangan)</h4>
+                                <p>CMB yang dinyatakan lolos seleksi CMB cadangan melakukan daftar ulang di sekolah pilihan CMB dinyatakan lolos seleksi</p>
+                                <span class="timeline-status status-upcoming">Akan Datang</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-date">13 Juli 2026</span>
+                            <div class="timeline-content">
+                                <h4>Awal Tahun Ajaran 2026/2027</h4>
+                                <p>CMB yang telah melakukan daftar ulang ditetapkan sebagai siswa pada sekolah yang bersangkutan dan mulai mengikuti kegiatan pembelajaran T.A. 2026/2027</p>
+                                <span class="timeline-status status-upcoming">Akan Datang</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Jalur Section -->
+        <section id="jalur" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-road"></i> Jalur dan Kuota SPMB SMA Negeri</h2>
+                </div>
+                <div class="card-body">
+                    <div class="info-box">
+                        <i class="fas fa-info-circle"></i>
+                        <div class="info-box-content">
+                            <h4>Total Daya Tampung</h4>
+                            <p>SMA Negeri 1 Kaliwungu memiliki daya tampung sebesar <strong id="totalDayatampung">396</strong> siswa untuk Tahun Ajaran 2026/2027, dengan pembagian kuota jalur sebagai berikut:</p>
+                        </div>
+                    </div>
+
+                    <div class="jalur-grid" id="jalurContainer">
+                        <div class="jalur-card domisili">
+                            <div class="jalur-header">
+                                <div class="jalur-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                <div class="jalur-title">
+                                    <h3>Jalur Domisili</h3>
+                                    <div class="kuota">Paling sedikit 33% dari daya tampung</div>
+                                </div>
+                            </div>
+                            <div class="jalur-body">
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Reguler (25%)</li>
+                                    <li><i class="fas fa-check-circle"></i> Prestasi dalam domisili (3%)</li>
+                                    <li><i class="fas fa-check-circle"></i> Khusus - Domisili Khusus (5%)</li>
+                                </ul>
+                                <div class="sub-jalur">
+                                    <h4><i class="fas fa-star"></i> Domisili Khusus (5%)</h4>
+                                    <div class="sub-jalur-item">
+                                        <span class="label">Wilayah kecamatan belum berdiri SMAN/SMKN</span>
+                                    </div>
+                                    <div class="sub-jalur-item">
+                                        <span class="label">Wilayah desa tempat kedudukan satuan pendidikan yang berdiri di atas lahan tanah kas desa</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="jalur-card afirmasi">
+                            <div class="jalur-header">
+                                <div class="jalur-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                                <div class="jalur-title">
+                                    <h3>Jalur Afirmasi</h3>
+                                    <div class="kuota">Paling sedikit 32% dari daya tampung</div>
+                                </div>
+                            </div>
+                            <div class="jalur-body">
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Keluarga ekonomi tidak mampu (DTSEN Desil 1-3)</li>
+                                    <li><i class="fas fa-check-circle"></i> Disabilitas (paling banyak 2%)</li>
+                                    <li><i class="fas fa-check-circle"></i> Anak Panti (paling banyak 3%)</li>
+                                    <li><i class="fas fa-check-circle"></i> ATS - Anak Tidak Sekolah (paling banyak 2%)</li>
+                                </ul>
+                                <div class="sub-jalur">
+                                    <h4><i class="fas fa-database"></i> Sumber Data</h4>
+                                    <div class="sub-jalur-item">
+                                        <span class="label">Data Kemiskinan</span>
+                                        <span class="value">DTSEN</span>
+                                    </div>
+                                    <div class="sub-jalur-item">
+                                        <span class="label">Desil yang Diterima</span>
+                                        <span class="value">Desil 1 - Desil 3</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="jalur-card prestasi">
+                            <div class="jalur-header">
+                                <div class="jalur-icon"><i class="fas fa-trophy"></i></div>
+                                <div class="jalur-title">
+                                    <h3>Jalur Prestasi</h3>
+                                    <div class="kuota">Paling sedikit 30% dari daya tampung</div>
+                                </div>
+                            </div>
+                            <div class="jalur-body">
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Prestasi Akademik (nilai rapor SMT 1-5 + Nilai TKA)</li>
+                                    <li><i class="fas fa-check-circle"></i> Prestasi Non Akademik + Kurasi Puspresnas</li>
+                                    <li><i class="fas fa-check-circle"></i> Ketua Organisasi (OSIS, MPK, Pramuka, PMR)</li>
+                                </ul>
+                                <div class="sub-jalur">
+                                    <h4><i class="fas fa-calculator"></i> Komponen Penilaian</h4>
+                                    <div class="sub-jalur-item">
+                                        <span class="label">Nilai Rapor SMT 1-5</span>
+                                    </div>
+                                    <div class="sub-jalur-item">
+                                        <span class="label">Nilai TKA</span>
+                                    </div>
+                                    <div class="sub-jalur-item">
+                                        <span class="label">Nilai Kejuaraan (Kurasi)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="jalur-card mutasi">
+                            <div class="jalur-header">
+                                <div class="jalur-icon"><i class="fas fa-exchange-alt"></i></div>
+                                <div class="jalur-title">
+                                    <h3>Jalur Mutasi</h3>
+                                    <div class="kuota">Paling banyak 5% dari daya tampung</div>
+                                </div>
+                            </div>
+                            <div class="jalur-body">
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Anak Guru (paling banyak 2%)</li>
+                                    <li><i class="fas fa-check-circle"></i> Mutasi pekerjaan orang tua (paling banyak 3%)</li>
+                                </ul>
+                                <div class="sub-jalur">
+                                    <h4><i class="fas fa-file-alt"></i> Persyaratan Khusus</h4>
+                                    <div class="sub-jalur-item">
+                                        <span class="label">Surat penugasan/tugas orang tua</span>
+                                    </div>
+                                    <div class="sub-jalur-item">
+                                        <span class="label">SK penempatan guru (untuk anak guru)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Persyaratan Section -->
+        <section id="persyaratan" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-file-alt"></i> Persyaratan Pendaftaran SPMB</h2>
+                </div>
+                <div class="card-body" id="persyaratanContainer">
+                    <div class="syarat-category">
+                        <h3><i class="fas fa-id-card"></i> Persyaratan Umum</h3>
+                        <div class="syarat-list">
+                            <div class="syarat-item">
+                                <div class="syarat-number">1</div>
+                                <div class="syarat-content">
+                                    <h4>Kartu Keluarga (KK)</h4>
+                                    <p>KK yang diterbitkan dan/atau telah tinggal paling singkat 1 tahun sebelum hari pertama tanggal pendaftaran SPMB berdasarkan data administrasi kependudukan yang diselenggarakan oleh Disdukcapil Kabupaten/Kota.</p>
+                                    <span class="syarat-tag tag-wajib">WAJIB</span>
+                                </div>
+                            </div>
+                            <div class="syarat-item">
+                                <div class="syarat-number">2</div>
+                                <div class="syarat-content">
+                                    <h4>Akta Kelahiran atau Surat Keterangan Lahir</h4>
+                                    <p>Dokumen resmi yang diterbitkan oleh instansi berwenang sebagai bukti usia calon murid baru.</p>
+                                    <span class="syarat-tag tag-wajib">WAJIB</span>
+                                </div>
+                            </div>
+                            <div class="syarat-item">
+                                <div class="syarat-number">3</div>
+                                <div class="syarat-content">
+                                    <h4>Ijazah/Surat Keterangan Lulus SMP/Sederajat</h4>
+                                    <p>Bukti kelulusan dari jenjang pendidikan sebelumnya yang telah diselesaikan.</p>
+                                    <span class="syarat-tag tag-wajib">WAJIB</span>
+                                </div>
+                            </div>
+                            <div class="syarat-item">
+                                <div class="syarat-number">4</div>
+                                <div class="syarat-content">
+                                    <h4>Rapor Semester 1 sampai 5</h4>
+                                    <p>Nilai rapor sebagai komponen penghitungan untuk jalur prestasi akademik.</p>
+                                    <span class="syarat-tag tag-penting">PENTING</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="syarat-category">
+                        <h3><i class="fas fa-hand-holding-heart"></i> Persyaratan Jalur Afirmasi</h3>
+                        <div class="syarat-list">
+                            <div class="syarat-item">
+                                <div class="syarat-number">1</div>
+                                <div class="syarat-content">
+                                    <h4>Data DTSEN (Data Tunggal Sosial dan Ekonomi Nasional)</h4>
+                                    <p>Calon murid baru dari keluarga ekonomi tidak mampu harus terdata dalam DTSEN kategori Desil 1 sampai Desil 3. Sumber data telah berubah dari DTKS ke DTSEN.</p>
+                                    <span class="syarat-tag tag-wajib">WAJIB</span>
+                                </div>
+                            </div>
+                            <div class="syarat-item">
+                                <div class="syarat-number">2</div>
+                                <div class="syarat-content">
+                                    <h4>Kartu Penyandang Disabilitas</h4>
+                                    <p>Calon murid baru disabilitas harus memiliki kartu penyandang disabilitas yang dikeluarkan oleh kementerian sosial, atau surat keterangan dari dokter/dokter spesialis/psikolog, dan/atau rekomendasi dari Tim Asesmen yang dibentuk oleh Dinas.</p>
+                                    <span class="syarat-tag tag-wajib">WAJIB</span>
+                                </div>
+                            </div>
+                            <div class="syarat-item">
+                                <div class="syarat-number">3</div>
+                                <div class="syarat-content">
+                                    <h4>Surat Keterangan Anak Panti</h4>
+                                    <p>Data anak panti prioritas 1 dan prioritas 2 yang ditetapkan oleh Dinas Sosial Provinsi Jawa Tengah.</p>
+                                    <span class="syarat-tag tag-wajib">WAJIB</span>
+                                </div>
+                            </div>
+                            <div class="syarat-item">
+                                <div class="syarat-number">4</div>
+                                <div class="syarat-content">
+                                    <h4>Surat Keterangan ATS (Anak Tidak Sekolah)</h4>
+                                    <p>Surat Keterangan Kepala Desa/Lurah pada wilayah calon murid baru ATS berdomisili, dilengkapi Surat Pernyataan dari Orang Tua/Wali. Status ATS sekurang-kurangnya 1 tahun, batas usia setinggi-tingginya 21 tahun pada tanggal 1 Juli 2026.</p>
+                                    <span class="syarat-tag tag-wajib">WAJIB</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="syarat-category">
+                        <h3><i class="fas fa-trophy"></i> Persyaratan Jalur Prestasi</h3>
+                        <div class="syarat-list">
+                            <div class="syarat-item">
+                                <div class="syarat-number">1</div>
+                                <div class="syarat-content">
+                                    <h4>Sertifikat/Piagam Kejuaraan</h4>
+                                    <p>Bukti prestasi akademik dan/atau non akademik yang dihasilkan dari sebuah kejuaraan paling lama 3 tahun sebelum tanggal pendaftaran SPMB. Prestasi telah dikurasi oleh Pusat Prestasi Nasional (Puspresnas) Kemendikdasmen.</p>
+                                    <span class="syarat-tag tag-wajib">WAJIB</span>
+                                </div>
+                            </div>
+                            <div class="syarat-item">
+                                <div class="syarat-number">2</div>
+                                <div class="syarat-content">
+                                    <h4>Surat Keterangan Kejuaraan Tidak Berjenjang</h4>
+                                    <p>Untuk kejuaraan tidak berjenjang yang belum dikurasi oleh Puspresnas, harus mendapat pengesahan dari Kepala Satuan Pendidikan calon murid baru berasal dan oleh OPD di tingkat Kabupaten/Kota.</p>
+                                    <span class="syarat-tag tag-penting">PENTING</span>
+                                </div>
+                            </div>
+                            <div class="syarat-item">
+                                <div class="syarat-number">3</div>
+                                <div class="syarat-content">
+                                    <h4>Surat Keputusan Ketua Organisasi</h4>
+                                    <p>Untuk prestasi non akademik berupa aktivitas siswa dalam organisasi di sekolah (dibuktikan dengan Keputusan Kepala Sekolah), dibatasi pada Ketua organisasi: Ketua OSIS, Ketua Kepanduan (Pramuka), Ketua MPK, Ketua PMR.</p>
+                                    <span class="syarat-tag tag-info">INFO</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="syarat-category">
+                        <h3><i class="fas fa-exchange-alt"></i> Persyaratan Jalur Mutasi</h3>
+                        <div class="syarat-list">
+                            <div class="syarat-item">
+                                <div class="syarat-number">1</div>
+                                <div class="syarat-content">
+                                    <h4>Surat Tugas/Perintah Tugas Orang Tua</h4>
+                                    <p>Surat penugasan dari instansi, lembaga, kantor atau perusahaan yang mempekerjakan. Perpindahan tugas paling lama 1 tahun sebelum hari pertama tanggal pendaftaran SPMB.</p>
+                                    <span class="syarat-tag tag-wajib">WAJIB</span>
+                                </div>
+                            </div>
+                            <div class="syarat-item">
+                                <div class="syarat-number">2</div>
+                                <div class="syarat-content">
+                                    <h4>Surat Keterangan Domisili Orang Tua/Wali</h4>
+                                    <p>Diterbitkan oleh Pejabat yang berwenang sebagai bukti domisili terbaru.</p>
+                                    <span class="syarat-tag tag-wajib">WAJIB</span>
+                                </div>
+                            </div>
+                            <div class="syarat-item">
+                                <div class="syarat-number">3</div>
+                                <div class="syarat-content">
+                                    <h4>SK Penempatan sebagai Guru (Untuk Anak Guru)</h4>
+                                    <p>Surat Keputusan penempatan orang tua sebagai guru di satuan pendidikan yang bersangkutan.</p>
+                                    <span class="syarat-tag tag-wajib">WAJIB</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tata Cara Section -->
+        <section id="tatacara" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-list-ol"></i> Tata Cara Pendaftaran SPMB</h2>
+                </div>
+                <div class="card-body" id="tatacaraContainer">
+                    <div class="info-box">
+                        <i class="fas fa-info-circle"></i>
+                        <div class="info-box-content">
+                            <h4>Pendaftaran Online (Daring)</h4>
+                            <p>SPMB SMA Negeri 1 Kaliwungu dilaksanakan secara daring (online) melalui website resmi. Pastikan Anda memiliki akses internet dan dokumen persyaratan dalam format digital.</p>
+                        </div>
+                    </div>
+
+                    <div class="tata-cara-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Pengajuan Akun SMPB</h3>
+                            <p>Akses website ppdb.jatengprov.go.id dan pilih menu pengajuan akun. Isi data diri calon murid baru dengan lengkap dan benar sesuai dokumen resmi.</p>
+                            <div class="step-note">
+                                <i class="fas fa-clock"></i> <strong>03 - 12 Juni 2026</strong> | Khusus tanggal 12 Juni DITUTUP pukul 15:30 WIB
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tata-cara-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Verifikasi Dokumen dan Aktivasi Akun</h3>
+                            <p>Setelah pengajuan akun online, lakukan verifikasi dokumen/berkas secara luring (offline) di sekolah terdekat atau sekolah tujuan. Bawa dokumen asli dan fotokopi.</p>
+                            <div class="step-note">
+                                <i class="fas fa-clock"></i> <strong>04 - 13 Juni 2026</strong> | Jam 00:00 - 15:30 WIB (13 Juni DITUTUP pukul 17:00 WIB)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tata-cara-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Pendaftaran dan Pemilihan Sekolah</h3>
+                            <p>Setelah akun aktif, login ke sistem dan pilih SMA Negeri 1 Kaliwungu sebagai pilihan sekolah. Anda dapat memilih lebih dari satu sekolah sesuai keinginan.</p>
+                            <div class="step-note">
+                                <i class="fas fa-clock"></i> <strong>15 - 18 Juni 2026</strong> | Jam 06:00 - 23:59 WIB (18 Juni DITUTUP pukul 17:00 WIB)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tata-cara-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Evaluasi dan Masa Tenang</h3>
+                            <p>Panitia melakukan evaluasi proses dan tahapan pelaksanaan SPMB. Pada masa ini, tidak ada aktivitas dari calon murid baru. Gunakan waktu untuk memastikan data sudah benar.</p>
+                            <div class="step-note">
+                                <i class="fas fa-clock"></i> <strong>19 - 20 Juni 2026</strong> | 24 Jam (Tidak ada aktivitas pendaftaran)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tata-cara-step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>Pengumuman Hasil Seleksi</h3>
+                            <p>Cek pengumuman hasil seleksi di website resmi, media sosial, atau papan pengumuman sekolah. Calon murid baru yang dinyatakan lolos wajib melakukan daftar ulang.</p>
+                            <div class="step-note">
+                                <i class="fas fa-clock"></i> <strong>21 Juni 2026</strong> | Paling lambat pukul 23:55 WIB di ppdb.jatengprov.go.id
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tata-cara-step">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
+                            <h3>Daftar Ulang (Utama)</h3>
+                            <p>CMB yang dinyatakan lolos seleksi melakukan daftar ulang secara luring di sekolah tempat CMB dinyatakan lolos. Bawa dokumen persyaratan asli dan fotokopi.</p>
+                            <div class="step-note">
+                                <i class="fas fa-clock"></i> <strong>22 - 25 Juni 2026</strong> | Jam 08:00 - 15:30 WIB (Di sekolah tempat diterima)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tata-cara-step">
+                        <div class="step-number">7</div>
+                        <div class="step-content">
+                            <h3>Pengumuman Peserta Cadangan</h3>
+                            <p>Apabila terdapat CMB yang lolos namun tidak melakukan daftar ulang, kekosongan akan diumumkan sebagai daya tampung cadangan untuk digantikan oleh calon lain.</p>
+                            <div class="step-note">
+                                <i class="fas fa-clock"></i> <strong>26 Juni 2026</strong> | Pengumuman online di website resmi
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tata-cara-step">
+                        <div class="step-number">8</div>
+                        <div class="step-content">
+                            <h3>Daftar Ulang (Cadangan)</h3>
+                            <p>CMB cadangan yang dinyatakan lolos melakukan daftar ulang di sekolah pilihan. Proses sama dengan daftar ulang utama.</p>
+                            <div class="step-note">
+                                <i class="fas fa-clock"></i> <strong>29 - 30 Juni 2026</strong> | Jam 08:00 - 15:30 WIB
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tata-cara-step">
+                        <div class="step-number">9</div>
+                        <div class="step-content">
+                            <h3>Awal Tahun Ajaran Baru</h3>
+                            <p>CMB yang telah melakukan daftar ulang ditetapkan sebagai siswa resmi dan mulai mengikuti kegiatan pembelajaran di SMA Negeri 1 Kaliwungu.</p>
+                            <div class="step-note">
+                                <i class="fas fa-clock"></i> <strong>13 Juli 2026</strong> | Mulai kegiatan pembelajaran T.A. 2026/2027
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div class="info-box-content">
+                            <h4>Catatan Penting</h4>
+                            <p>1. Semua biaya pendidikan <strong>GRATIS</strong> (dibiayai oleh APBD Provinsi Jawa Tengah)<br>
+                            2. Dilarang melakukan pungutan/sumbangan terkait pelaksanaan SPMB<br>
+                            3. Jika kuota afirmasi tidak terpenuhi, sisa kuota dialihkan ke jalur domisili<br>
+                            4. Pastikan data di KK sesuai dengan rapor/ijazah dan akta kelahiran</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kontak Section -->
+        <section id="kontak" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-phone"></i> Informasi dan Kontak</h2>
+                </div>
+                <div class="card-body">
+                    <div class="jalur-grid">
+                        <div class="jalur-card" style="border-top-color: var(--primary);">
+                            <div class="jalur-header">
+                                <div class="jalur-icon" style="background: var(--primary);"><i class="fas fa-school"></i></div>
+                                <div class="jalur-title">
+                                    <h3>SMA Negeri 1 Kaliwungu</h3>
+                                    <div class="kuota">Posko Informasi SPMB</div>
+                                </div>
+                            </div>
+                            <div class="jalur-body">
+                                <ul>
+                                    <li><i class="fas fa-map-marker-alt"></i> Jalan Pemuda No. 134 Semarang (Kode Pos 50132)</li>
+                                    <li><i class="fas fa-phone"></i> Telepon: (024) 3515301</li>
+                                    <li><i class="fas fa-fax"></i> Fax: (024) 3520071</li>
+                                    <li><i class="fas fa-envelope"></i> Email: didik@jatengprov.go.id</li>
+                                    <li><i class="fas fa-globe"></i> Website: ppdb.jatengprov.go.id</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="jalur-card" style="border-top-color: var(--info);">
+                            <div class="jalur-header">
+                                <div class="jalur-icon" style="background: var(--info);"><i class="fas fa-users"></i></div>
+                                <div class="jalur-title">
+                                    <h3>Panitia SPMB Sekolah</h3>
+                                    <div class="kuota">Petugas Piket Posko</div>
+                                </div>
+                            </div>
+                            <div class="jalur-body">
+                                <ul>
+                                    <li><i class="fas fa-user-tie"></i> Ketua SPMB: BUNJARI, S.Pd., M.Pd.</li>
+                                    <li><i class="fas fa-user"></i> Sekretaris: Drs. NAWA HERIYADI</li>
+                                    <li><i class="fas fa-user"></i> Bendahara: MUJIYONO, S.Pd., M.Par</li>
+                                    <li><i class="fas fa-user"></i> Humas: RIZA AULIA RIZQIAWATI, S.Pd.</li>
+                                    <li><i class="fas fa-user"></i> Admin: MUHAMMAD FAKQIH Z., S.Pd</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="jalur-card" style="border-top-color: var(--success);">
+                            <div class="jalur-header">
+                                <div class="jalur-icon" style="background: var(--success);"><i class="fas fa-calendar-check"></i></div>
+                                <div class="jalur-title">
+                                    <h3>Jadwal Piket Posko</h3>
+                                    <div class="kuota">Mei - Juni 2026</div>
+                                </div>
+                            </div>
+                            <div class="jalur-body">
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Senin, 18/05/2026 - Dra. TITIK WIJI PURWANTI dkk</li>
+                                    <li><i class="fas fa-check-circle"></i> Selasa, 19/05/2026 - M. DARUSALAM, S.Pd. dkk</li>
+                                    <li><i class="fas fa-check-circle"></i> Rabu, 20/05/2026 - AAN'S CHARISMA OKTAVIANA, S.Pd. dkk</li>
+                                    <li><i class="fas fa-check-circle"></i> Kamis, 21/05/2026 - ROSIDAH HANDAYANI, S.Pd. dkk</li>
+                                    <li><i class="fas fa-check-circle"></i> Jumat, 22/05/2026 - GUNADI AGUNG W., S.Pd, M.Si dkk</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3><i class="fas fa-shield-alt"></i> NO TITIP - NO JASTIP</h3>
+            <p>Sistem Penerimaan Murid Baru (SPMB) SMA Negeri 1 Kaliwungu<br>
+            Tahun Ajaran 2026/2027 | Provinsi Jawa Tengah<br>
+            Dinas Pendidikan Provinsi Jawa Tengah</p>
+            <div class="footer-links">
+                <a href="#"><i class="fas fa-globe"></i> ppdb.jatengprov.go.id</a>
+                <a href="#"><i class="fas fa-envelope"></i> didik@jatengprov.go.id</a>
+                <a href="#"><i class="fas fa-phone"></i> (024) 3515301</a>
+            </div>
+            <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.6;">
+                &copy; 2026 SMA Negeri 1 Kaliwungu. Aplikasi E-Tamu SPMB.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Admin Login Modal -->
+    <div class="modal-overlay" id="adminLoginModal">
+        <div class="modal">
+            <h2><i class="fas fa-lock"></i> Login Admin</h2>
+            <form onsubmit="handleAdminLogin(event)">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="adminUsername" placeholder="Masukkan username" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="adminPassword" placeholder="Masukkan password" required>
+                </div>
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-sign-in-alt"></i> Masuk
+                </button>
+            </form>
+            <p style="text-align: center; margin-top: 15px; color: var(--gray); font-size: 0.85rem;">
+                Default: admin / admin123
+            </p>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-container">
+            <div class="admin-header">
+                <h2><i class="fas fa-cog"></i> Panel Admin - E-Tamu SPMB</h2>
+                <button class="btn-logout" onclick="adminLogout()">
+                    <i class="fas fa-sign-out-alt"></i> Keluar
+                </button>
+            </div>
+            <div class="admin-body">
+                <div class="alert alert-success" id="adminAlert">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Data berhasil disimpan!</span>
+                </div>
+
+                <div class="admin-nav">
+                    <button class="admin-nav-btn active" onclick="showAdminSection('admin-jadwal')">
+                        <i class="fas fa-calendar-alt"></i> Kelola Jadwal
+                    </button>
+                    <button class="admin-nav-btn" onclick="showAdminSection('admin-jalur')">
+                        <i class="fas fa-road"></i> Kelola Jalur
+                    </button>
+                    <button class="admin-nav-btn" onclick="showAdminSection('admin-syarat')">
+                        <i class="fas fa-file-alt"></i> Kelola Persyaratan
+                    </button>
+                    <button class="admin-nav-btn" onclick="showAdminSection('admin-tatacara')">
+                        <i class="fas fa-list-ol"></i> Kelola Tata Cara
+                    </button>
+                    <button class="admin-nav-btn" onclick="showAdminSection('admin-pengumuman')">
+                        <i class="fas fa-bullhorn"></i> Kelola Pengumuman
+                    </button>
+                    <button class="admin-nav-btn" onclick="showAdminSection('admin-kontak')">
+                        <i class="fas fa-phone"></i> Kelola Kontak
+                    </button>
+                    <button class="admin-nav-btn" onclick="showAdminSection('admin-statistik')">
+                        <i class="fas fa-chart-bar"></i> Statistik
+                    </button>
+                </div>
+
+                <!-- Kelola Jadwal -->
+                <div class="admin-section active" id="admin-jadwal">
+                    <h3><i class="fas fa-calendar-alt"></i> Kelola Jadwal SPMB</h3>
+                    <button class="btn-add" onclick="addJadwalItem()">
+                        <i class="fas fa-plus"></i> Tambah Jadwal
+                    </button>
+                    <div id="adminJadwalList"></div>
+                </div>
+
+                <!-- Kelola Jalur -->
+                <div class="admin-section" id="admin-jalur">
+                    <h3><i class="fas fa-road"></i> Kelola Jalur dan Kuota</h3>
+                    <div class="admin-form">
+                        <div class="form-group">
+                            <label>Total Daya Tampung</label>
+                            <input type="number" id="editDayatampung" value="396">
+                        </div>
+                        <div class="form-group">
+                            <label>Kuota Jalur Domisili (%)</label>
+                            <input type="number" id="editDomisili" value="33">
+                        </div>
+                        <div class="form-group">
+                            <label>Kuota Jalur Afirmasi (%)</label>
+                            <input type="number" id="editAfirmasi" value="32">
+                        </div>
+                        <div class="form-group">
+                            <label>Kuota Jalur Prestasi (%)</label>
+                            <input type="number" id="editPrestasi" value="30">
+                        </div>
+                        <div class="form-group">
+                            <label>Kuota Jalur Mutasi (%)</label>
+                            <input type="number" id="editMutasi" value="5">
+                        </div>
+                        <button class="btn-save" onclick="saveJalurData()">
+                            <i class="fas fa-save"></i> Simpan Perubahan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Kelola Persyaratan -->
+                <div class="admin-section" id="admin-syarat">
+                    <h3><i class="fas fa-file-alt"></i> Kelola Persyaratan</h3>
+                    <button class="btn-add" onclick="addSyaratItem()">
+                        <i class="fas fa-plus"></i> Tambah Persyaratan
+                    </button>
+                    <div id="adminSyaratList"></div>
+                </div>
+
+                <!-- Kelola Tata Cara -->
+                <div class="admin-section" id="admin-tatacara">
+                    <h3><i class="fas fa-list-ol"></i> Kelola Tata Cara</h3>
+                    <button class="btn-add" onclick="addTataCaraItem()">
+                        <i class="fas fa-plus"></i> Tambah Langkah
+                    </button>
+                    <div id="adminTataCaraList"></div>
+                </div>
+
+                <!-- Kelola Pengumuman -->
+                <div class="admin-section" id="admin-pengumuman">
+                    <h3><i class="fas fa-bullhorn"></i> Kelola Pengumuman</h3>
+                    <button class="btn-add" onclick="addPengumumanItem()">
+                        <i class="fas fa-plus"></i> Tambah Pengumuman
+                    </button>
+                    <div id="adminPengumumanList"></div>
+                </div>
+
+                <!-- Kelola Kontak -->
+                <div class="admin-section" id="admin-kontak">
+                    <h3><i class="fas fa-phone"></i> Kelola Informasi Kontak</h3>
+                    <div class="admin-form">
+                        <div class="form-group">
+                            <label>Alamat Sekolah</label>
+                            <input type="text" id="editAlamat" value="Jalan Pemuda No. 134 Semarang">
+                        </div>
+                        <div class="form-group">
+                            <label>Telepon</label>
+                            <input type="text" id="editTelepon" value="(024) 3515301">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" id="editEmail" value="didik@jatengprov.go.id">
+                        </div>
+                        <div class="form-group">
+                            <label>Website</label>
+                            <input type="text" id="editWebsite" value="ppdb.jatengprov.go.id">
+                        </div>
+                        <div class="form-group">
+                            <label>Ketua SPMB</label>
+                            <input type="text" id="editKetua" value="BUNJARI, S.Pd., M.Pd.">
+                        </div>
+                        <button class="btn-save" onclick="saveKontakData()">
+                            <i class="fas fa-save"></i> Simpan Perubahan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Statistik -->
+                <div class="admin-section" id="admin-statistik">
+                    <h3><i class="fas fa-chart-bar"></i> Statistik Aplikasi</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon blue"><i class="fas fa-eye"></i></div>
+                            <div class="stat-info">
+                                <h3 id="statPengunjung">1,245</h3>
+                                <p>Total Pengunjung</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon green"><i class="fas fa-calendar-check"></i></div>
+                            <div class="stat-info">
+                                <h3 id="statJadwalCount">10</h3>
+                                <p>Jumlah Jadwal</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon orange"><i class="fas fa-bullhorn"></i></div>
+                            <div class="stat-info">
+                                <h3 id="statPengumumanCount">3</h3>
+                                <p>Jumlah Pengumuman</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon purple"><i class="fas fa-file-alt"></i></div>
+                            <div class="stat-info">
+                                <h3 id="statSyaratCount">12</h3>
+                                <p>Jumlah Persyaratan</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== DATA STORAGE ====================
+        // Default data structure
+        const defaultData = {
+            dayaTampung: 396,
+            jalur: {
+                domisili: 33,
+                afirmasi: 32,
+                prestasi: 30,
+                mutasi: 5
+            },
+            jadwal: [
+                { id: 1, tanggal: "15 Mei 2026", kegiatan: "Pengumuman SPMB 2026", deskripsi: "Pengumuman SPMB di website, media sosial, dan papan pengumuman sekolah", status: "upcoming", catatan: "" },
+                { id: 2, tanggal: "03 - 12 Juni 2026", kegiatan: "Pengajuan Akun", deskripsi: "CMB mengajukan akun SMPB secara daring. Khusus tanggal 12 Juni 2026 DITUTUP pukul 15:30 WIB", status: "upcoming", catatan: "" },
+                { id: 3, tanggal: "04 - 13 Juni 2026", kegiatan: "Verifikasi Dokumen dan Aktivasi Akun", deskripsi: "Setelah pengajuan akun, CMB melakukan verifikasi dokumen/berkas secara luring di Sekolah. Khusus tanggal 13 Juni 2026 DITUTUP pukul 17:00 WIB", status: "upcoming", catatan: "" },
+                { id: 4, tanggal: "15 - 18 Juni 2026", kegiatan: "Pendaftaran dan Pemilihan Sekolah", deskripsi: "Dilakukan CMB secara online. Khusus tanggal 18 Juni 2026 DITUTUP pukul 17:00 WIB", status: "upcoming", catatan: "" },
+                { id: 5, tanggal: "19 - 20 Juni 2026", kegiatan: "Evaluasi dan Masa Tenang", deskripsi: "Panitia melakukan evaluasi proses/tahapan pelaksanaan SPMB untuk memitigasi potensi kerawanan", status: "upcoming", catatan: "" },
+                { id: 6, tanggal: "21 Juni 2026", kegiatan: "Pengumuman Hasil Seleksi (Utama)", deskripsi: "Pengumuman hasil di website, medsos, papan pengumuman sekolah. Paling lambat pukul 23:55 WIB di situs ppdb.jatengprov.go.id", status: "upcoming", catatan: "" },
+                { id: 7, tanggal: "22 - 25 Juni 2026", kegiatan: "Daftar Ulang (Utama)", deskripsi: "CMB yang dinyatakan lolos seleksi melakukan daftar ulang secara luring di sekolah tempat CMB dinyatakan lolos seleksi. Jam 08:00 - 15:30 WIB", status: "upcoming", catatan: "" },
+                { id: 8, tanggal: "26 Juni 2026", kegiatan: "Pengumuman Daftar Peserta Cadangan", deskripsi: "Berdasarkan data CMB yang dinyatakan lolos seleksi namun tidak melakukan daftar ulang, maka kekosongan tersebut akan diumumkan sebagai daya tampung cadangan", status: "upcoming", catatan: "" },
+                { id: 9, tanggal: "29 - 30 Juni 2026", kegiatan: "Daftar Ulang (Cadangan)", deskripsi: "CMB yang dinyatakan lolos seleksi CMB cadangan melakukan daftar ulang di sekolah pilihan CMB dinyatakan lolos seleksi", status: "upcoming", catatan: "" },
+                { id: 10, tanggal: "13 Juli 2026", kegiatan: "Awal Tahun Ajaran 2026/2027", deskripsi: "CMB yang telah melakukan daftar ulang ditetapkan sebagai siswa pada sekolah yang bersangkutan dan mulai mengikuti kegiatan pembelajaran T.A. 2026/2027", status: "upcoming", catatan: "" }
+            ],
+            persyaratan: [
+                { id: 1, kategori: "umum", nomor: 1, judul: "Kartu Keluarga (KK)", deskripsi: "KK yang diterbitkan dan/atau telah tinggal paling singkat 1 tahun sebelum hari pertama tanggal pendaftaran SPMB berdasarkan data administrasi kependudukan yang diselenggarakan oleh Disdukcapil Kabupaten/Kota.", tag: "wajib" },
+                { id: 2, kategori: "umum", nomor: 2, judul: "Akta Kelahiran atau Surat Keterangan Lahir", deskripsi: "Dokumen resmi yang diterbitkan oleh instansi berwenang sebagai bukti usia calon murid baru.", tag: "wajib" },
+                { id: 3, kategori: "umum", nomor: 3, judul: "Ijazah/Surat Keterangan Lulus SMP/Sederajat", deskripsi: "Bukti kelulusan dari jenjang pendidikan sebelumnya yang telah diselesaikan.", tag: "wajib" },
+                { id: 4, kategori: "umum", nomor: 4, judul: "Rapor Semester 1 sampai 5", deskripsi: "Nilai rapor sebagai komponen penghitungan untuk jalur prestasi akademik.", tag: "penting" },
+                { id: 5, kategori: "afirmasi", nomor: 1, judul: "Data DTSEN", deskripsi: "Calon murid baru dari keluarga ekonomi tidak mampu harus terdata dalam DTSEN kategori Desil 1 sampai Desil 3.", tag: "wajib" },
+                { id: 6, kategori: "afirmasi", nomor: 2, judul: "Kartu Penyandang Disabilitas", deskripsi: "Calon murid baru disabilitas harus memiliki kartu penyandang disabilitas yang dikeluarkan oleh kementerian sosial.", tag: "wajib" },
+                { id: 7, kategori: "afirmasi", nomor: 3, judul: "Surat Keterangan Anak Panti", deskripsi: "Data anak panti prioritas 1 dan prioritas 2 yang ditetapkan oleh Dinas Sosial Provinsi Jawa Tengah.", tag: "wajib" },
+                { id: 8, kategori: "afirmasi", nomor: 4, judul: "Surat Keterangan ATS", deskripsi: "Surat Keterangan Kepala Desa/Lurah. Status ATS sekurang-kurangnya 1 tahun, batas usia 21 tahun pada tanggal 1 Juli 2026.", tag: "wajib" },
+                { id: 9, kategori: "prestasi", nomor: 1, judul: "Sertifikat/Piagam Kejuaraan", deskripsi: "Bukti prestasi akademik dan/atau non akademik paling lama 3 tahun sebelum tanggal pendaftaran. Prestasi telah dikurasi oleh Puspresnas.", tag: "wajib" },
+                { id: 10, kategori: "prestasi", nomor: 2, judul: "Surat Keterangan Kejuaraan Tidak Berjenjang", deskripsi: "Untuk kejuaraan tidak berjenjang yang belum dikurasi oleh Puspresnas.", tag: "penting" },
+                { id: 11, kategori: "prestasi", nomor: 3, judul: "Surat Keputusan Ketua Organisasi", deskripsi: "Dibatasi pada Ketua organisasi: Ketua OSIS, Ketua Kepanduan (Pramuka), Ketua MPK, Ketua PMR.", tag: "info" },
+                { id: 12, kategori: "mutasi", nomor: 1, judul: "Surat Tugas/Perintah Tugas Orang Tua", deskripsi: "Surat penugasan dari instansi. Perpindahan tugas paling lama 1 tahun sebelum hari pertama tanggal pendaftaran SPMB.", tag: "wajib" }
+            ],
+            tataCara: [
+                { id: 1, nomor: 1, judul: "Pengajuan Akun SMPB", deskripsi: "Akses website ppdb.jatengprov.go.id dan pilih menu pengajuan akun. Isi data diri calon murid baru dengan lengkap dan benar.", catatan: "03 - 12 Juni 2026 | Khusus tanggal 12 Juni DITUTUP pukul 15:30 WIB" },
+                { id: 2, nomor: 2, judul: "Verifikasi Dokumen dan Aktivasi Akun", deskripsi: "Lakukan verifikasi dokumen/berkas secara luring di sekolah terdekat atau sekolah tujuan. Bawa dokumen asli dan fotokopi.", catatan: "04 - 13 Juni 2026 | Jam 00:00 - 15:30 WIB" },
+                { id: 3, nomor: 3, judul: "Pendaftaran dan Pemilihan Sekolah", deskripsi: "Login ke sistem dan pilih SMA Negeri 1 Kaliwungu sebagai pilihan sekolah. Anda dapat memilih lebih dari satu sekolah.", catatan: "15 - 18 Juni 2026 | Jam 06:00 - 23:59 WIB" },
+                { id: 4, nomor: 4, judul: "Evaluasi dan Masa Tenang", deskripsi: "Panitia melakukan evaluasi proses. Gunakan waktu untuk memastikan data sudah benar.", catatan: "19 - 20 Juni 2026 | 24 Jam" },
+                { id: 5, nomor: 5, judul: "Pengumuman Hasil Seleksi", deskripsi: "Cek pengumuman hasil seleksi di website resmi. Calon murid baru yang lolos wajib melakukan daftar ulang.", catatan: "21 Juni 2026 | Paling lambat pukul 23:55 WIB" },
+                { id: 6, nomor: 6, judul: "Daftar Ulang (Utama)", deskripsi: "CMB yang lolos melakukan daftar ulang secara luring di sekolah tempat diterima. Bawa dokumen asli dan fotokopi.", catatan: "22 - 25 Juni 2026 | Jam 08:00 - 15:30 WIB" },
+                { id: 7, nomor: 7, judul: "Pengumuman Peserta Cadangan", deskripsi: "Kekosongan dari CMB yang tidak daftar ulang akan diumumkan sebagai daya tampung cadangan.", catatan: "26 Juni 2026 | Pengumuman online" },
+                { id: 8, nomor: 8, judul: "Daftar Ulang (Cadangan)", deskripsi: "CMB cadangan yang lolos melakukan daftar ulang di sekolah pilihan.", catatan: "29 - 30 Juni 2026 | Jam 08:00 - 15:30 WIB" },
+                { id: 9, nomor: 9, judul: "Awal Tahun Ajaran Baru", deskripsi: "CMB yang telah daftar ulang ditetapkan sebagai siswa resmi dan mulai mengikuti kegiatan pembelajaran.", catatan: "13 Juli 2026 | Mulai pembelajaran T.A. 2026/2027" }
+            ],
+            pengumuman: [
+                { id: 1, judul: "Pendaftaran SPMB 2026/2027", isi: "Pendaftaran SPMB SMA Negeri 1 Kaliwungu akan dibuka pada tanggal 03 - 12 Juni 2026. Calon murid baru dapat mengajukan akun SMPB secara daring.", tipe: "info" },
+                { id: 2, judul: "Perubahan Sumber Data Kemiskinan", isi: "Mulai SPMB 2026/2027, sumber data kemiskinan berubah dari DTKS menjadi DTSEN (Data Tunggal Sosial dan Ekonomi Nasional). Pastikan data keluarga Anda terdaftar dalam DTSEN.", tipe: "warning" },
+                { id: 3, judul: "Prestasi Terbaik Nasional", isi: "Provinsi Jawa Tengah meraih predikat Terbaik Nasional dalam penyelenggaraan SPMB SMAN & SMKN T.A. 2025/2026. Mari kita pertahankan bersama!", tipe: "success" }
+            ],
+            kontak: {
+                alamat: "Jalan Pangeran Juminah Kaliwungu Selatan Kode Pos 51372",
+                telepon: "(0294) 382 567",
+                fax: "(0294) 382 567",
+                email: "smakaliwungu@yahoo.co.id",
+                website: "sman1kaliwungu.sch.id",
+                ketua: "BUNJARI, S.Pd., M.Pd.",
+                sekretaris: "Drs. NAWA HERIYADI",
+                bendahara: "MUJIYONO, S.Pd., M.Par"
+            }
+        };
+
+        // Load data from localStorage or use default
+        let appData = JSON.parse(localStorage.getItem('spmbData')) || JSON.parse(JSON.stringify(defaultData));
+
+        // ==================== LIVE CLOCK ====================
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('id-ID', { hour12: false });
+            document.getElementById('liveClock').textContent = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // ==================== NAVIGATION ====================
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            // Show target section
+            document.getElementById(sectionId).classList.add('active');
+            // Update nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.section === sectionId) {
+                    link.classList.add('active');
+                }
+            });
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ==================== ADMIN LOGIN ====================
+        function openAdminLogin() {
+            document.getElementById('adminLoginModal').classList.add('active');
+        }
+
+        function closeAdminLogin() {
+            document.getElementById('adminLoginModal').classList.remove('active');
+        }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+
+            // Simple authentication (in production, use proper backend auth)
+            if (username === 'admin' && password === 'admin123') {
+                closeAdminLogin();
+                document.getElementById('adminPanel').classList.add('active');
+                document.body.style.overflow = 'hidden';
+                loadAdminData();
+                showNotification('Login berhasil!', 'success');
+            } else {
+                showNotification('Username atau password salah!', 'error');
+            }
+        }
+
+        function adminLogout() {
+            document.getElementById('adminPanel').classList.remove('active');
+            document.body.style.overflow = '';
+            document.getElementById('adminUsername').value = '';
+            document.getElementById('adminPassword').value = '';
+            showNotification('Berhasil keluar dari panel admin', 'success');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('adminLoginModal').addEventListener('click', function(e) {
+            if (e.target === this) closeAdminLogin();
+        });
+
+        // ==================== NOTIFICATION ====================
+        function showNotification(message, type) {
+            const badge = document.getElementById('notifBadge');
+            const icon = badge.querySelector('.notif-icon i');
+            const title = badge.querySelector('.notif-content h4');
+            const text = badge.querySelector('.notif-content p');
+
+            badge.className = 'notif-badge ' + type;
+            if (type === 'success') {
+                icon.className = 'fas fa-check';
+                title.textContent = 'Berhasil!';
+            } else {
+                icon.className = 'fas fa-exclamation-circle';
+                title.textContent = 'Perhatian!';
+            }
+            text.textContent = message;
+
+            badge.classList.add('active');
+            setTimeout(() => {
+                badge.classList.remove('active');
+            }, 3000);
+        }
+
+        // ==================== ADMIN PANEL ====================
+        function showAdminSection(sectionId) {
+            document.querySelectorAll('.admin-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelectorAll('.admin-nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function loadAdminData() {
+            renderJadwalAdmin();
+            renderSyaratAdmin();
+            renderTataCaraAdmin();
+            renderPengumumanAdmin();
+            updateStatistik();
+        }
+
+        // ==================== JADWAL ADMIN ====================
+        function renderJadwalAdmin() {
+            const container = document.getElementById('adminJadwalList');
+            let html = '<table class="data-table"><thead><tr><th>No</th><th>Tanggal</th><th>Kegiatan</th><th>Deskripsi</th><th>Status</th><th>Aksi</th></tr></thead><tbody>';
+            appData.jadwal.forEach((item, index) => {
+                html += `<tr>
+                    <td>${index + 1}</td>
+                    <td><input type="text" value="${item.tanggal}" onchange="updateJadwal(${item.id}, 'tanggal', this.value)" style="width:120px;padding:5px;border:1px solid #ddd;border-radius:4px;"></td>
+                    <td><input type="text" value="${item.kegiatan}" onchange="updateJadwal(${item.id}, 'kegiatan', this.value)" style="width:200px;padding:5px;border:1px solid #ddd;border-radius:4px;"></td>
+                    <td><textarea onchange="updateJadwal(${item.id}, 'deskripsi', this.value)" style="width:250px;padding:5px;border:1px solid #ddd;border-radius:4px;resize:vertical;" rows="2">${item.deskripsi}</textarea></td>
+                    <td>
+                        <select onchange="updateJadwal(${item.id}, 'status', this.value)" style="padding:5px;border:1px solid #ddd;border-radius:4px;">
+                            <option value="upcoming" ${item.status === 'upcoming' ? 'selected' : ''}>Akan Datang</option>
+                            <option value="active" ${item.status === 'active' ? 'selected' : ''}>Sedang Berlangsung</option>
+                            <option value="completed" ${item.status === 'completed' ? 'selected' : ''}>Selesai</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button class="btn-delete" onclick="deleteJadwal(${item.id})"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>`;
+            });
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
+        function updateJadwal(id, field, value) {
+            const item = appData.jadwal.find(j => j.id === id);
+            if (item) {
+                item[field] = value;
+                saveData();
+                showNotification('Jadwal diperbarui', 'success');
+                renderPublicJadwal();
+            }
+        }
+
+        function deleteJadwal(id) {
+            if (confirm('Yakin ingin menghapus jadwal ini?')) {
+                appData.jadwal = appData.jadwal.filter(j => j.id !== id);
+                saveData();
+                renderJadwalAdmin();
+                renderPublicJadwal();
+                showNotification('Jadwal dihapus', 'success');
+            }
+        }
+
+        function addJadwalItem() {
+            const newId = Math.max(...appData.jadwal.map(j => j.id), 0) + 1;
+            appData.jadwal.push({
+                id: newId,
+                tanggal: "Tanggal Baru",
+                kegiatan: "Kegiatan Baru",
+                deskripsi: "Deskripsi kegiatan",
+                status: "upcoming",
+                catatan: ""
+            });
+            saveData();
+            renderJadwalAdmin();
+            renderPublicJadwal();
+            showNotification('Jadwal baru ditambahkan', 'success');
+        }
+
+        // ==================== SYARAT ADMIN ====================
+        function renderSyaratAdmin() {
+            const container = document.getElementById('adminSyaratList');
+            const categories = { umum: 'Umum', afirmasi: 'Afirmasi', prestasi: 'Prestasi', mutasi: 'Mutasi' };
+            let html = '';
+            for (const [key, label] of Object.entries(categories)) {
+                const items = appData.persyaratan.filter(s => s.kategori === key);
+                html += `<h4 style="margin:20px 0 10px;color:var(--primary);">${label}</h4>`;
+                html += '<table class="data-table"><thead><tr><th>No</th><th>Judul</th><th>Deskripsi</th><th>Tag</th><th>Aksi</th></tr></thead><tbody>';
+                items.forEach(item => {
+                    html += `<tr>
+                        <td>${item.nomor}</td>
+                        <td><input type="text" value="${item.judul}" onchange="updateSyarat(${item.id}, 'judul', this.value)" style="width:200px;padding:5px;border:1px solid #ddd;border-radius:4px;"></td>
+                        <td><textarea onchange="updateSyarat(${item.id}, 'deskripsi', this.value)" style="width:300px;padding:5px;border:1px solid #ddd;border-radius:4px;resize:vertical;" rows="2">${item.deskripsi}</textarea></td>
+                        <td>
+                            <select onchange="updateSyarat(${item.id}, 'tag', this.value)" style="padding:5px;border:1px solid #ddd;border-radius:4px;">
+                                <option value="wajib" ${item.tag === 'wajib' ? 'selected' : ''}>Wajib</option>
+                                <option value="penting" ${item.tag === 'penting' ? 'selected' : ''}>Penting</option>
+                                <option value="info" ${item.tag === 'info' ? 'selected' : ''}>Info</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn-delete" onclick="deleteSyarat(${item.id})"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>`;
+                });
+                html += '</tbody></table>';
+            }
+            container.innerHTML = html;
+        }
+
+        function updateSyarat(id, field, value) {
+            const item = appData.persyaratan.find(s => s.id === id);
+            if (item) {
+                item[field] = value;
+                saveData();
+                showNotification('Persyaratan diperbarui', 'success');
+                renderPublicSyarat();
+            }
+        }
+
+        function deleteSyarat(id) {
+            if (confirm('Yakin ingin menghapus persyaratan ini?')) {
+                appData.persyaratan = appData.persyaratan.filter(s => s.id !== id);
+                saveData();
+                renderSyaratAdmin();
+                renderPublicSyarat();
+                showNotification('Persyaratan dihapus', 'success');
+            }
+        }
+
+        function addSyaratItem() {
+            const kategori = prompt('Pilih kategori (umum/afirmasi/prestasi/mutasi):', 'umum');
+            if (!kategori || !['umum','afirmasi','prestasi','mutasi'].includes(kategori)) return;
+            const newId = Math.max(...appData.persyaratan.map(s => s.id), 0) + 1;
+            const nomor = appData.persyaratan.filter(s => s.kategori === kategori).length + 1;
+            appData.persyaratan.push({
+                id: newId,
+                kategori: kategori,
+                nomor: nomor,
+                judul: "Persyaratan Baru",
+                deskripsi: "Deskripsi persyaratan",
+                tag: "wajib"
+            });
+            saveData();
+            renderSyaratAdmin();
+            renderPublicSyarat();
+            showNotification('Persyaratan baru ditambahkan', 'success');
+        }
+
+        // ==================== TATA CARA ADMIN ====================
+        function renderTataCaraAdmin() {
+            const container = document.getElementById('adminTataCaraList');
+            let html = '<table class="data-table"><thead><tr><th>No</th><th>Langkah</th><th>Deskripsi</th><th>Catatan</th><th>Aksi</th></tr></thead><tbody>';
+            appData.tataCara.forEach((item, index) => {
+                html += `<tr>
+                    <td>${item.nomor}</td>
+                    <td><input type="text" value="${item.judul}" onchange="updateTataCara(${item.id}, 'judul', this.value)" style="width:200px;padding:5px;border:1px solid #ddd;border-radius:4px;"></td>
+                    <td><textarea onchange="updateTataCara(${item.id}, 'deskripsi', this.value)" style="width:300px;padding:5px;border:1px solid #ddd;border-radius:4px;resize:vertical;" rows="2">${item.deskripsi}</textarea></td>
+                    <td><input type="text" value="${item.catatan}" onchange="updateTataCara(${item.id}, 'catatan', this.value)" style="width:250px;padding:5px;border:1px solid #ddd;border-radius:4px;"></td>
+                    <td>
+                        <button class="btn-delete" onclick="deleteTataCara(${item.id})"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>`;
+            });
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
+        function updateTataCara(id, field, value) {
+            const item = appData.tataCara.find(t => t.id === id);
+            if (item) {
+                item[field] = value;
+                saveData();
+                showNotification('Tata cara diperbarui', 'success');
+                renderPublicTataCara();
+            }
+        }
+
+        function deleteTataCara(id) {
+            if (confirm('Yakin ingin menghapus langkah ini?')) {
+                appData.tataCara = appData.tataCara.filter(t => t.id !== id);
+                // Re-number
+                appData.tataCara.forEach((t, i) => t.nomor = i + 1);
+                saveData();
+                renderTataCaraAdmin();
+                renderPublicTataCara();
+                showNotification('Langkah dihapus', 'success');
+            }
+        }
+
+        function addTataCaraItem() {
+            const newId = Math.max(...appData.tataCara.map(t => t.id), 0) + 1;
+            const nomor = appData.tataCara.length + 1;
+            appData.tataCara.push({
+                id: newId,
+                nomor: nomor,
+                judul: "Langkah Baru",
+                deskripsi: "Deskripsi langkah",
+                catatan: "Catatan waktu"
+            });
+            saveData();
+            renderTataCaraAdmin();
+            renderPublicTataCara();
+            showNotification('Langkah baru ditambahkan', 'success');
+        }
+
+        // ==================== PENGUMUMAN ADMIN ====================
+        function renderPengumumanAdmin() {
+            const container = document.getElementById('adminPengumumanList');
+            let html = '<table class="data-table"><thead><tr><th>No</th><th>Judul</th><th>Isi</th><th>Tipe</th><th>Aksi</th></tr></thead><tbody>';
+            appData.pengumuman.forEach((item, index) => {
+                html += `<tr>
+                    <td>${index + 1}</td>
+                    <td><input type="text" value="${item.judul}" onchange="updatePengumuman(${item.id}, 'judul', this.value)" style="width:200px;padding:5px;border:1px solid #ddd;border-radius:4px;"></td>
+                    <td><textarea onchange="updatePengumuman(${item.id}, 'isi', this.value)" style="width:300px;padding:5px;border:1px solid #ddd;border-radius:4px;resize:vertical;" rows="2">${item.isi}</textarea></td>
+                    <td>
+                        <select onchange="updatePengumuman(${item.id}, 'tipe', this.value)" style="padding:5px;border:1px solid #ddd;border-radius:4px;">
+                            <option value="info" ${item.tipe === 'info' ? 'selected' : ''}>Info</option>
+                            <option value="warning" ${item.tipe === 'warning' ? 'selected' : ''}>Peringatan</option>
+                            <option value="success" ${item.tipe === 'success' ? 'selected' : ''}>Sukses</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button class="btn-delete" onclick="deletePengumuman(${item.id})"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>`;
+            });
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
+        function updatePengumuman(id, field, value) {
+            const item = appData.pengumuman.find(p => p.id === id);
+            if (item) {
+                item[field] = value;
+                saveData();
+                showNotification('Pengumuman diperbarui', 'success');
+                renderPublicPengumuman();
+            }
+        }
+
+        function deletePengumuman(id) {
+            if (confirm('Yakin ingin menghapus pengumuman ini?')) {
+                appData.pengumuman = appData.pengumuman.filter(p => p.id !== id);
+                saveData();
+                renderPengumumanAdmin();
+                renderPublicPengumuman();
+                showNotification('Pengumuman dihapus', 'success');
+            }
+        }
+
+        function addPengumumanItem() {
+            const newId = Math.max(...appData.pengumuman.map(p => p.id), 0) + 1;
+            appData.pengumuman.push({
+                id: newId,
+                judul: "Pengumuman Baru",
+                isi: "Isi pengumuman",
+                tipe: "info"
+            });
+            saveData();
+            renderPengumumanAdmin();
+            renderPublicPengumuman();
+            showNotification('Pengumuman baru ditambahkan', 'success');
+        }
+
+        // ==================== JALUR & KONTAK ADMIN ====================
+        function saveJalurData() {
+            appData.dayaTampung = parseInt(document.getElementById('editDayatampung').value) || 396;
+            appData.jalur.domisili = parseInt(document.getElementById('editDomisili').value) || 33;
+            appData.jalur.afirmasi = parseInt(document.getElementById('editAfirmasi').value) || 32;
+            appData.jalur.prestasi = parseInt(document.getElementById('editPrestasi').value) || 30;
+            appData.jalur.mutasi = parseInt(document.getElementById('editMutasi').value) || 5;
+            saveData();
+            updatePublicStats();
+            showNotification('Data jalur dan kuota disimpan', 'success');
+        }
+
+        function saveKontakData() {
+            appData.kontak.alamat = document.getElementById('editAlamat').value;
+            appData.kontak.telepon = document.getElementById('editTelepon').value;
+            appData.kontak.email = document.getElementById('editEmail').value;
+            appData.kontak.website = document.getElementById('editWebsite').value;
+            appData.kontak.ketua = document.getElementById('editKetua').value;
+            saveData();
+            showNotification('Data kontak disimpan', 'success');
+        }
+
+        // ==================== RENDER PUBLIC CONTENT ====================
+        function renderPublicJadwal() {
+            const container = document.getElementById('jadwalTimeline');
+            let html = '';
+            appData.jadwal.forEach(item => {
+                const statusClass = item.status === 'active' ? 'active' : '';
+                const statusLabel = item.status === 'upcoming' ? 'Akan Datang' : item.status === 'active' ? 'Sedang Berlangsung' : 'Selesai';
+                const statusBadgeClass = item.status === 'upcoming' ? 'status-upcoming' : item.status === 'active' ? 'status-active' : 'status-completed';
+                html += `<div class="timeline-item ${statusClass}">
+                    <span class="timeline-date">${item.tanggal}</span>
+                    <div class="timeline-content">
+                        <h4>${item.kegiatan}</h4>
+                        <p>${item.deskripsi}</p>
+                        <span class="timeline-status ${statusBadgeClass}">${statusLabel}</span>
+                    </div>
+                </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function renderPublicSyarat() {
+            // This is handled by the static HTML structure, but could be made dynamic
+            // For now, the admin edits update the data which would be used on page reload
+        }
+
+        function renderPublicTataCara() {
+            // Similar to above
+        }
+
+        function renderPublicPengumuman() {
+            const container = document.getElementById('pengumumanList');
+            let html = '';
+            appData.pengumuman.forEach(item => {
+                const boxClass = item.tipe === 'info' ? 'info-box' : item.tipe === 'warning' ? 'warning-box' : 'success-box';
+                const icon = item.tipe === 'info' ? 'fa-info-circle' : item.tipe === 'warning' ? 'fa-exclamation-triangle' : 'fa-check-circle';
+                html += `<div class="${boxClass}">
+                    <i class="fas ${icon}"></i>
+                    <div class="info-box-content">
+                        <h4>${item.judul}</h4>
+                        <p>${item.isi}</p>
+                    </div>
+                </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function updatePublicStats() {
+            document.getElementById('statDayatampung').textContent = appData.dayaTampung;
+            document.getElementById('totalDayatampung').textContent = appData.dayaTampung;
+            document.getElementById('statPrestasi').textContent = appData.jalur.prestasi + '%';
+            document.getElementById('statAfirmasi').textContent = appData.jalur.afirmasi + '%';
+            document.getElementById('statJadwal').textContent = appData.jadwal.length;
+        }
+
+        function updateStatistik() {
+            document.getElementById('statJadwalCount').textContent = appData.jadwal.length;
+            document.getElementById('statPengumumanCount').textContent = appData.pengumuman.length;
+            document.getElementById('statSyaratCount').textContent = appData.persyaratan.length;
+        }
+
+        // ==================== SAVE DATA ====================
+        function saveData() {
+            localStorage.setItem('spmbData', JSON.stringify(appData));
+        }
+
+        // ==================== RESET DATA ====================
+        function resetData() {
+            if (confirm('Yakin ingin mengembalikan semua data ke default? Data yang sudah diubah akan hilang.')) {
+                appData = JSON.parse(JSON.stringify(defaultData));
+                saveData();
+                loadAdminData();
+                renderPublicJadwal();
+                renderPublicPengumuman();
+                updatePublicStats();
+                showNotification('Data berhasil direset ke default', 'success');
+            }
+        }
+
+        // ==================== INITIALIZATION ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            renderPublicJadwal();
+            renderPublicPengumuman();
+            updatePublicStats();
+
+            // Check if data exists in localStorage
+            if (!localStorage.getItem('spmbData')) {
+                saveData();
+            }
+        });
+    </script>
+</body>
+</html>
